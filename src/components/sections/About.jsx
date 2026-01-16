@@ -1,4 +1,6 @@
 import { RevealOnScroll } from "../Reveal";
+import React from "react";
+
 
 export const About = () => {
   const frontendSkills = [
@@ -39,7 +41,7 @@ export const About = () => {
 
           <div className="rounded-xl p-8 border-white/10 border hover:-translate-y-1 transition-all">
             <p className="text-gray-300 mb-6 leading-relaxed">
-              I'm a Full-Stack Developer with <strong>2+ years of professional experience</strong>
+              I'm a Full-Stack Developer with <strong>2+ years of professional experience </strong>
               in designing and delivering scalable web applications in the maritime and enterprise domain.
               I specialize in backend engineering using <strong>Node.js/Express.js</strong>, building 
               production-grade APIs, and integrating SQL/NoSQL databases such as <strong>MySQL, MongoDB, and Cassandra</strong>. 
