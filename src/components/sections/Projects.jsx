@@ -1,88 +1,124 @@
 import { RevealOnScroll } from "../Reveal";
 
 export const Projects = () => {
+  const projects = [
+    {
+      title: "Real-Time Ride Dispatch & Driver Allocation System",
+      description:
+        "An event-driven backend system built using Node.js, Redis (BullMQ), and MongoDB. Ride creation events are pushed into a queue and processed asynchronously by distributed workers that assign drivers in real time.",
+      architectureHighlights: [
+        "API service publishes ride events to Redis queue",
+        "Worker service consumes queue and assigns drivers",
+        "Exponential retry with backoff strategy",
+        "Idempotent state validation to prevent duplicate assignment",
+        "Active ride capacity protection to prevent system overload",
+      ],
+      tech: [
+        "Node.js",
+        "Express.js",
+        "BullMQ",
+        "Redis (Upstash)",
+        "MongoDB",
+        "Render",
+        "Vercel",
+      ],
+      image: "/rideapi.png",
+      buttons: [
+        { label: "Live Demo", href: "https://ride-hailing-project.vercel.app/" },
+        { label: "GitHub", href: "https://github.com/Gokul-66/ride-hailing-project" },
+      ],
+    },
+    {
+      title: "AI Resume Analyzer",
+      description:
+        "A full-stack AI-powered resume analysis platform that extracts resume text, evaluates ATS compatibility, analyzes job description match, and provides structured feedback using LLaMA 3 via Groq API.",
+      architectureHighlights: [
+        "PDF text extraction pipeline",
+        "AI inference through secured backend API",
+        "Firebase authentication and Firestore history storage",
+        "Role-based access control with approval workflow",
+        "Structured JSON normalization of AI responses",
+      ],
+      tech: [
+        "React",
+        "Vite",
+        "Firebase Auth",
+        "Firestore",
+        "Groq LLaMA3",
+        "Node.js",
+        "Express",
+        "Render",
+        "Vercel",
+      ],
+      image: "/resume.png",
+      buttons: [
+        { label: "Live Demo", href: "https://resume-analyzer-two-xi.vercel.app" },
+        { label: "GitHub", href: "https://github.com/Gokul-66/resume-analyzer" },
+      ],
+    },
+  ];
+
   return (
     <section
       id="projects"
-      className="min-h-screen flex items-center justify-center py-20"
+      className="min-h-screen flex items-center justify-center py-20 px-4"
     >
       <RevealOnScroll>
-        <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent text-center">
-            {" "}
-            Featured Projects
-          </h2>
-        <div className="flex justify-center w-full">
-  <div className="
-    max-w-3xl w-full 
-    p-6 rounded-2xl 
-    border border-white/10 
-    backdrop-blur-xl bg-white/5
-    hover:-translate-y-1 hover:border-blue-500/40
-    hover:shadow-[0_8px_30px_rgba(59,130,246,0.25)]
-    transition-all
-  ">
+        <div className="max-w-6xl mx-auto w-full">
+          <h2 className="section-title mb-10">Featured Projects</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {projects.map((project) => (
+              <div
+                key={project.title}
+                className="w-full p-6 md:p-8 glass-card glass-card-hover flex flex-col"
+              >
+                <div className="w-full h-64 md:h-72 mb-6 overflow-hidden rounded-xl bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border border-white/15">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} Preview`}
+                    className="w-full h-full object-cover opacity-90 hover:opacity-100 transition duration-300"
+                  />
+                </div>
 
-    {/* Mockup Image */}
-    <div className="
-      w-full h-107 mb-6 
-      overflow-hidden rounded-xl 
-      bg-gradient-to-r from-blue-500/20 to-purple-600/20 
-      border border-white/10 
-      shadow-[0_4px_20px_rgba(0,0,0,0.3)]
-    ">
-      <img
-        src="/resume.png"
-        alt="AI Resume Analyzer Preview"
-        className="w-full h-full object-cover opacity-90 hover:opacity-100 transition"
-      />
-    </div>
+                <h3 className="text-2xl font-bold mb-3 text-cyan-100">{project.title}</h3>
 
-    {/* Title */}
-    <h3 className="text-2xl font-bold mb-3">AI Resume Analyzer</h3>
+                <p className="text-slate-200/90 mb-5 leading-relaxed">{project.description}</p>
 
-    {/* Description */}
-    <p className="text-gray-300 mb-6 leading-relaxed">
-      A full-stack AI-driven resume analysis platform that extracts text from 
-      uploaded resumes, evaluates ATS score, identifies skill gaps, compares 
-      with job descriptions, and generates actionable recommendations using 
-      Groq LLaMA3. Built with secure authentication and cloud-hosted backend APIs.
-    </p>
+                <div className="mb-5">
+                  <h4 className="text-sm font-semibold tracking-wide uppercase text-cyan-200/85 mb-2">
+                    Architecture Highlights
+                  </h4>
+                  <ul className="list-disc list-inside space-y-2 text-slate-300/95 leading-relaxed">
+                    {project.architectureHighlights.map((point) => (
+                      <li key={point}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
 
-    {/* Technologies */}
-    <div className="flex flex-wrap gap-2 mb-6">
-      {[
-        "React", "Vite", "Firebase", "Firestore", "Groq LLaMA3",
-        "Node.js", "Express", "Render", "Vercel"
-      ].map((tech) => (
-        <span
-          key={tech}
-          className="bg-blue-500/10 text-blue-400 
-          py-1 px-4 rounded-full text-sm 
-          border border-blue-500/20
-          hover:bg-blue-500/20 transition-all"
-        >
-          {tech}
-        </span>
-      ))}
-    </div>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech.map((tech) => (
+                    <span key={tech} className="glass-pill">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-    {/* Button */}
-    <div className="text-center">
-      <a
-        href="https://resume-analyzer-two-xi.vercel.app"
-        target="_blank"
-        className="text-blue-400 hover:text-blue-300 font-semibold transition"
-      >
-        View Project →
-      </a>
-    </div>
-
-  </div>
-</div>
-
-
-
+                <div className="mt-auto flex flex-wrap gap-3">
+                  {project.buttons.map((button) => (
+                    <a
+                      key={button.label}
+                      href={button.href}
+                      target={button.href.startsWith("http") ? "_blank" : undefined}
+                      rel={button.href.startsWith("http") ? "noreferrer" : undefined}
+                      className="glow-button inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm"
+                    >
+                      {button.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </RevealOnScroll>
     </section>
