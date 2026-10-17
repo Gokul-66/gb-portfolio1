@@ -109,7 +109,7 @@ export const Navbar = () => {
             href="https://github.com/Gokul-66/gb-portfolio1"
             target="_blank"
             rel="noreferrer"
-            className="nav-pill-btn"
+            className="nav-pill-btn hidden sm:inline-flex"
             aria-label="GitHub Repository"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

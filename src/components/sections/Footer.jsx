@@ -62,7 +62,7 @@ export const Footer = () => {
             © 2026 Gokul Babu · Dev By Gokul
           </div>
 
-          <div style={{ display: 'flex', gap: '16px' }}>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <a
               href="/resume.pdf"
               download="Gokul_Babu_Resume.pdf"
