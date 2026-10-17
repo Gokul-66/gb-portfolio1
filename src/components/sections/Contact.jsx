@@ -1,159 +1,227 @@
-
-import { useState } from "react";
-import { RevealOnScroll } from "../Reveal";
-import emailjs from "emailjs-com";
-import React from "react";
-
+import { useState } from 'react';
+import emailjs from 'emailjs-com';
+import { RevealOnScroll } from '../Reveal';
 
 export const Contact = () => {
-  const contactLinks = [
-    {
-      name: "LinkedIn",
-      href: "https://www.linkedin.com/in/gokul-babu-870b11226/",
-      icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className="h-5 w-5">
-          <path d="M6.94 8.5H3.56v11h3.38v-11ZM5.25 3a1.95 1.95 0 1 0 0 3.9A1.95 1.95 0 0 0 5.25 3Zm4.04 5.5v11h3.37v-5.45c0-1.44.27-2.84 2.05-2.84 1.76 0 1.78 1.64 1.78 2.94v5.35h3.38v-6.03c0-2.96-.64-5.23-4.1-5.23-1.67 0-2.78.91-3.24 1.78h-.05V8.5H9.29Z" />
-        </svg>
-      ),
-    },
-  ];
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState({ state: 'idle', message: '' });
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+  const email = 'gokulmr65@gmail.com';
 
-  const handleSubmit = (e) => {
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({ state: 'error', message: 'Please fill out all fields.' });
+      return;
+    }
+
+    setStatus({ state: 'loading', message: 'Sending message...' });
 
     emailjs
-      .sendForm(
-        import.meta.env.VITE_SERVICE_ID,
-        import.meta.env.VITE_TEMPLATE_ID,
-        e.target,
-        import.meta.env.VITE_PUBLIC_KEY
+      .send(
+        'service_3539t3u',
+        'template_6p3v0d8',
+        {
+          from_name: formData.name,
+          to_name: 'Gokul Babu',
+          from_email: formData.email,
+          message: formData.message,
+        },
+        'VfL933Fw60XlXwRvd'
       )
-      .then((result) => {
-        alert("Message Sent!");
-        setFormData({ name: "", email: "", message: "" });
+      .then(() => {
+        setStatus({ state: 'success', message: 'Message sent successfully! I will reply shortly.' });
+        setFormData({ name: '', email: '', message: '' });
       })
-      .catch(() => alert("Oops! Something went wrong. Please try again."));
+      .catch(() => {
+        setStatus({
+          state: 'error',
+          message: `Unable to send via form right now. Please email directly to ${email}.`,
+        });
+      });
   };
 
   return (
-    <section
-      id="contact"
-      className="min-h-screen flex items-center justify-center py-20 px-4"
-    >
-      <RevealOnScroll>
-        <div className="w-full min-w-[300px] md:w-[560px] p-6 md:p-8 glass-card glass-card-hover">
-          <h2 className="section-title mb-8">
-            {" "}
-            Get In Touch
-          </h2>
-          {/* Contact Meta Row */}
-          <div className="flex items-center justify-center gap-5 mb-8">
+    <section id="contact" className="contact-section">
+      <div className="site-container">
+        <RevealOnScroll>
+          <div className="contact-split-grid">
+            {/* Left Column: Heading, Subtext, Social Links */}
+            <div>
+              <span className="section-tag">06 / Contact</span>
+              <h2 className="contact-headline-big">
+                Let's Work<br />
+                <span className="contact-headline-dimmed">Together</span>
+              </h2>
 
-            {/* LinkedIn */}
-            {contactLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={link.name}
-                className="
-        h-11 w-11 rounded-full
-        border border-white/20
-        bg-white/[0.06]
-        text-slate-200/90
-        flex items-center justify-center
-        transition-all duration-300
-        hover:-translate-y-0.5
-        hover:border-cyan-200/50
-        hover:text-cyan-100
-        hover:bg-cyan-500/10
-        hover:shadow-[0_0_18px_rgba(103,232,249,0.24)]
-      "
-              >
-                {link.icon}
-              </a>
-            ))}
+              <p className="contact-subtext">
+                Have a project in mind? Looking for a Software Engineer to help build high-performance backend systems, distributed architectures, or reliable full-stack applications? I am always open to discussing new engineering opportunities.
+              </p>
 
-            {/* Phone Badge */}
-            <div
-              className="
-      h-11 px-4 rounded-full
-      border border-white/20
-      bg-white/[0.06]
-      text-slate-300/90 text-sm
-      flex items-center
-    "
-            >
-              📞 +91 9747461315
+              <div className="contact-social-pills">
+                <a
+                  href="https://github.com/Gokul-66"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill"
+                  aria-label="GitHub Profile"
+                  title="GitHub"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+                    <path d="M9 18c-4.51 2-5-2-7-2" />
+                  </svg>
+                </a>
+
+                <a
+                  href="https://www.linkedin.com/in/gokul-babu-870b11226/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill"
+                  aria-label="LinkedIn Profile"
+                  title="LinkedIn"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                    <rect width="4" height="12" x="2" y="9" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </a>
+
+                <a
+                  href={`mailto:${email}`}
+                  className="contact-social-pill"
+                  aria-label="Email Gokul"
+                  title="Send Email"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </a>
+
+                <a
+                  href="/resume.pdf"
+                  download="Gokul_Babu_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-social-pill"
+                  aria-label="Download Resume (PDF)"
+                  title="Download Resume (PDF)"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                </a>
+              </div>
             </div>
 
+            {/* Right Column: Signature Email Card + Direct Form */}
+            <div>
+              {/* Roman Caseres Signature Email Card */}
+              <div className="email-showcase-card">
+                <div className="email-card-top-icons">
+                  <div className="email-icon-mail">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </div>
+                  <div className="email-icon-arrow">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
+                    </svg>
+                  </div>
+                </div>
+
+                <div>
+                  <span className="email-drop-label">Drop me a line</span>
+                  <h3 className="email-display-text">
+                    {email}
+                  </h3>
+
+                  <button
+                    type="button"
+                    onClick={copyToClipboard}
+                    className="email-copy-btn"
+                  >
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                    </svg>
+                    <span>{copied ? '✓ Copied to clipboard!' : 'Copy Address'}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Direct Form */}
+              <div className="contact-form-box">
+                <div className="contact-form-title">Or send a direct message</div>
+
+                {status.state !== 'idle' && (
+                  <div
+                    style={{
+                      padding: '10px 14px',
+                      borderRadius: '4px',
+                      marginBottom: '14px',
+                      fontSize: '0.8125rem',
+                      fontFamily: 'var(--font-mono)',
+                      background: status.state === 'success' ? 'var(--emerald-bg)' : 'rgba(239, 68, 68, 0.1)',
+                      color: status.state === 'success' ? 'var(--emerald)' : '#ef4444',
+                      border: `1px solid ${status.state === 'success' ? 'var(--emerald)' : 'rgba(239, 68, 68, 0.3)'}`,
+                    }}
+                  >
+                    {status.message}
+                  </div>
+                )}
+
+                <form onSubmit={handleSubmit} className="contact-form-grid">
+                  <input
+                    type="text"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                    className="contact-input"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    className="contact-input"
+                    required
+                  />
+                  <textarea
+                    placeholder="Your Message / Engineering Proposal"
+                    value={formData.message}
+                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    className="contact-textarea"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    disabled={status.state === 'loading'}
+                    className="contact-submit-btn"
+                  >
+                    {status.state === 'loading' ? 'Sending...' : 'Send Message ↗'}
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
-          <h6 className="flex items-center justify-center mb-8">
-            {" "}
-            OR
-          </h6>
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <div className="relative">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                value={formData.name}
-                className="w-full bg-white/[0.06] border border-white/15 rounded-xl px-4 py-3 text-white transition duration-300 focus:outline-none focus:border-cyan-200/55 focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(103,232,249,0.2)]"
-                placeholder="Name..."
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-              />
-            </div>
-
-            <div className="relative">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                value={formData.email}
-                className="w-full bg-white/[0.06] border border-white/15 rounded-xl px-4 py-3 text-white transition duration-300 focus:outline-none focus:border-cyan-200/55 focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(103,232,249,0.2)]"
-                placeholder="example@gmail.com"
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-              />
-            </div>
-
-            <div className="relative">
-              <textarea
-                id="message"
-                name="message"
-                required
-                rows={5}
-                value={formData.message}
-                className="w-full bg-white/[0.06] border border-white/15 rounded-xl px-4 py-3 text-white transition duration-300 focus:outline-none focus:border-cyan-200/55 focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(103,232,249,0.2)]"
-                placeholder="Your Message..."
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full glow-button"
-            >
-              Send Message
-            </button>
-          </form>
-        </div>
-      </RevealOnScroll>
+        </RevealOnScroll>
+      </div>
     </section>
   );
 };

@@ -1,50 +1,124 @@
-import { RevealOnScroll } from "../Reveal";
-import React from "react";
-
+import { RevealOnScroll } from '../Reveal';
 
 export const Home = () => {
   return (
-    <section
-      id="home"
-      className="min-h-screen flex items-center justify-center relative px-4"
-    >
-      <RevealOnScroll>
-        <div className="text-center z-10 px-4 max-w-5xl mx-auto glass-card glass-card-hover py-12 md:py-16">
-          <h1 className="text-5xl md:text-7xl font-bold mb-7 bg-gradient-to-r from-slate-100 via-blue-200 to-cyan-200 bg-clip-text text-transparent leading-tight tracking-tight">
-            Hi, I'm Gokul Babu
+    <section id="home" className="hero-section">
+      <div className="hero-backdrop-grid" aria-hidden="true" />
+
+      <div className="site-container relative z-10">
+        <RevealOnScroll>
+          {/* Top Meta Row */}
+          <div className="hero-meta-row">
+            <div className="hero-index-tag">
+              <div>01/</div>
+              <div className="hero-location-text">
+                From Kerala, India
+              </div>
+            </div>
+
+            <div className="status-indicator-pill">
+              <span className="status-pulsing-dot" aria-hidden="true" />
+              <span>Open for work</span>
+            </div>
+          </div>
+
+          {/* Giant Headline */}
+          <h1 className="hero-headline">
+            Software<br />
+            Engineer
           </h1>
 
-          <p className="text-cyan-100/90 text-lg md:text-xl font-medium mb-4 max-w-4xl mx-auto px-2 md:px-4 leading-relaxed">
-            Software Engineer | Even Driven Systems & AI-Integrated Applications
-          </p>
-
-          <p className="text-slate-300/90 text-lg mb-10 max-w-4xl mx-auto px-2 md:px-4 leading-relaxed">
-            "I design and build scalable backend systems, event-driven architectures, and AI-powered applications. Focused on performance, reliability, and clean system design."
-          </p>
-
-          <div className="flex justify-center gap-4 flex-wrap">
-            <a
-              href="#projects"
-              className="glow-button rounded-full min-w-[170px] text-center"
-            >
-              View Projects
-            </a>
-            <a
-              href="/resume.pdf"
-              className="glow-button rounded-full min-w-[170px] text-center" download
-            >
-              Download Resume
-            </a>
-
-            <a
-              href="#contact"
-              className="glow-button rounded-full min-w-[170px] text-center"
-            >
-              Contact Me
-            </a>
+          {/* Tech Badges Row */}
+          <div className="hero-tags-row">
+            <a href="#projects" className="hero-tag-pill">Node.js</a>
+            <a href="#projects" className="hero-tag-pill">React / Next.js</a>
+            <a href="#projects" className="hero-tag-pill">TypeScript</a>
+            <a href="#projects" className="hero-tag-pill">System Architecture</a>
+            <a href="#projects" className="hero-tag-pill">BullMQ / Queues</a>
+            <a href="#projects" className="hero-tag-pill">Redis</a>
           </div>
-        </div>
-      </RevealOnScroll>
+
+          {/* Split 7 / 5 Grid: Media Card on Left, Name & Mission on Right */}
+          <div className="hero-split-grid">
+            {/* Left: Reticle Framed System Architecture Visualization */}
+            <div className="hero-media-col">
+              <div className="hero-card-container corner-frame group">
+                {/* 4 Viewfinder Corner Brackets */}
+                <span className="corner-reticle corner-tl" aria-hidden="true" />
+                <span className="corner-reticle corner-tr" aria-hidden="true" />
+                <span className="corner-reticle corner-bl" aria-hidden="true" />
+                <span className="corner-reticle corner-br" aria-hidden="true" />
+
+                <img
+                  src="/system-architecture.png"
+                  alt="System Architecture Workflow — API Gateway, Message Queue, Workers, Redis & Databases"
+                  loading="eager"
+                  fetchPriority="high"
+                />
+              </div>
+
+              <div className="hero-card-caption">
+                <span className="hero-caption-arrow" aria-hidden="true">→</span>
+                <div className="hero-caption-text">
+                  Distributed System Architecture<br />
+                  API Gateway → Message Queue → Workers → Redis & Databases
+                </div>
+              </div>
+
+              <div className="hero-caption-text" style={{ marginTop: '16px', opacity: 0.6 }}>
+                Engineering systems by Gokul Babu
+              </div>
+            </div>
+
+            {/* Right: Mission Statement, Big Name, and CTA */}
+            <div className="hero-name-col">
+              <p className="hero-mission-p">
+                Building fast, clean backend systems & web apps for real users.
+              </p>
+              <div className="hero-roles-sub">
+                Open for full-time / contract roles<br />
+                Available worldwide
+              </div>
+
+              <div className="hero-name-big">
+                Gokul<br />
+                Babu
+              </div>
+
+              <div className="hero-year-tag">
+                2026 Portfolio
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', marginTop: '24px' }}>
+                <a href="#projects" className="hero-cta-btn" style={{ marginTop: 0 }}>
+                  <span>Selected work</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="7" x2="17" y2="17" />
+                    <polyline points="17 7 17 17 7 17" />
+                  </svg>
+                </a>
+
+                <a
+                  href="/resume.pdf"
+                  download="Gokul_Babu_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-cta-btn hero-resume-btn"
+                  style={{ marginTop: 0 }}
+                  aria-label="Download Gokul Babu's Resume (PDF)"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  <span>Download Resume</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </RevealOnScroll>
+      </div>
     </section>
   );
 };

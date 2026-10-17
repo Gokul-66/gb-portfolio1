@@ -1,36 +1,41 @@
-import { useState,useEffect } from 'react';
-import React from "react";
+import { useState, useEffect } from 'react';
 
-export const LoadingScreen = ({onComplete}) =>{
-    const [text, setText] = useState('');
-    const fullText = 'Loading...';
-    
-    useEffect(() => {   
-        let index = 0;
-        const interval = setInterval(() => {
-            setText(fullText.substring(0, index));
-            index++;
-            if (index > fullText.length) {
-                clearInterval(interval);
-                setTimeout(() => {
-                    onComplete();
-                }, 1000);
+export const LoadingScreen = ({ onComplete }) => {
+  const [progress, setProgress] = useState(0);
+  const [done, setDone] = useState(false);
 
-            }
-        },100)
-        return () => clearInterval(interval);
-    },[onComplete]);
+  useEffect(() => {
+    const start = performance.now();
+    const duration = 1600;
+    let raf;
 
-       
+    const tick = (now) => {
+      const elapsed = now - start;
+      const p = Math.min(elapsed / duration, 1);
+      setProgress(Math.round(p * 100));
+      if (p < 1) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setTimeout(() => {
+          setDone(true);
+          setTimeout(onComplete, 500);
+        }, 200);
+      }
+    };
 
-    return (
-        <div className="fixed inset-0 z-50 text-gray-100 flex flex-col items-center justify-center app-background">
-      <div className="mb-4 text-4xl font-mono font-bold text-cyan-100">
-        {text} <span className="animate-blink ml-1"> | </span>
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [onComplete]);
+
+  return (
+    <div className={`loading-screen${done ? ' done' : ''}`}>
+      <div className="loading-wordmark">GB.</div>
+      <div className="loading-bar-track">
+        <div
+          className="loading-bar-fill"
+          style={{ width: `${progress}%`, transition: 'width 0.05s linear' }}
+        />
       </div>
-
-      <div className="w-[200px] h-[2px] bg-slate-700/70 rounded relative overflow-hidden">
-        <div className="w-[40%] h-full bg-cyan-300 shadow-[0_0_15px_rgba(103,232,249,0.8)] animate-loading-bar"></div>
-      </div>
-    </div>)
-}
+    </div>
+  );
+};

@@ -1,81 +1,96 @@
-import { RevealOnScroll } from "../Reveal";
-import React from "react";
+import { RevealOnScroll } from '../Reveal';
 
 export const About = () => {
-  const techStackGroups = [
+  const categories = [
     {
-      title: "Core Languages",
-      items: ["JavaScript", "TypeScript", "Python"],
+      name: 'Backend Engineering',
+      skills: ['Node.js', 'Express.js', 'BullMQ', 'RESTful APIs', 'Microservices', 'Event-Driven Systems'],
     },
     {
-      title: "Backend Engineering",
-      items: ["Node.js", "Express.js", "REST APIs", "Redis / BullMQ", "Event-Driven Systems"],
+      name: 'Frontend Development',
+      skills: ['React', 'Next.js', 'TypeScript', 'JavaScript (ES6+)', 'Tailwind CSS', 'HTML5 / CSS3'],
     },
     {
-      title: "Frontend Development",
-      items: ["Angular", "React (Basics)", "TailwindCSS"],
+      name: 'Databases & In-Memory',
+      skills: ['Redis (Upstash / Cluster)', 'MySQL', 'MongoDB', 'Firestore'],
     },
     {
-      title: "Databases",
-      items: ["MongoDB", "MySQL", "Cassandra (Exposure)"],
+      name: 'Cloud & Infrastructure',
+      skills: ['AWS SQS', 'AWS CloudWatch', 'GCP Cloud Scheduler', 'Docker', 'Git / GitHub', 'Render / Vercel'],
     },
-    {
-      title: "Cloud & DevOps",
-      items: ["AWS (S3, SQS, CloudWatch)", "Docker", "CI/CD"],
-    },
-  ];
-
-  const skillLevels = [
-    { label: "JavaScript", level: 95 },
-    { label: "Angular", level: 95 },
-    { label: "Node.js / Express.js", level: 86 },
-    { label: "AWS Services", level: 74 },
-    { label: "MongoDB / MySQL", level: 78 },
   ];
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center py-20 px-4">
-      <RevealOnScroll>
-        <div className="max-w-5xl mx-auto w-full">
-          <h2 className="section-title mb-10">
-            About Me
-          </h2>
+    <section id="about" className="about-section">
+      <div className="site-container">
+        <RevealOnScroll>
+          <div className="about-split-layout">
+            {/* Left: Bio & Narrative */}
+            <div className="about-col-left">
+              <span className="section-tag">03 / About</span>
+              <h2 className="section-headline">
+                About<br />Me
+              </h2>
 
-          <div className="glass-card glass-card-hover p-8 md:p-10">
-            <div className="text-slate-200/90 mb-8 leading-relaxed text-[1.02rem] space-y-4">
-              <p>
-                I'm a Full-Stack Developer with professional experience building backend services, asynchronous processing systems, and cloud-integrated applications. I work primarily with Node.js, distributed workers, and database-driven systems, with a strong focus on reliability, scalability, and maintainable architecture.
+              <p className="about-bio-p">
+                I am a Software Engineer focused on building robust backend systems, distributed queue architectures, and high-performance full-stack web applications.
               </p>
-              <p>
-                I enjoy solving system-level problems, designing efficient APIs, and building software that performs well under real-world constraints.
-              </p>
-            </div>
 
-            <div className="glass-card p-6 md:p-7 mb-6">
-              <h3 className="text-xl font-bold mb-5 text-cyan-100">Skill Level</h3>
-              <div className="space-y-4">
-                {skillLevels.map((skill) => (
-                  <div key={skill.label}>
-                    <div className="flex items-center justify-between mb-1.5 text-sm">
-                      <span className="text-slate-200">{skill.label}</span>
-                      <span className="text-cyan-200">{skill.level}%</span>
-                    </div>
-                    <div className="progress-track">
-                      <div className="progress-fill transition-all duration-700" style={{ width: `${skill.level}%` }} />
-                    </div>
-                  </div>
-                ))}
+              <p className="about-bio-p">
+                At <strong>InnerSpace Co-working</strong>, I engineer backend services powering automated reservation engines, concurrency validation, and payment workflows—achieving zero double-booking incidents under concurrent load.
+              </p>
+
+              <p className="about-bio-p">
+                I take pride in profiling slow queries, cutting API latency from ~2s to under 300ms using Redis caching, and replacing blocking I/O with asynchronous event pipelines.
+              </p>
+
+              <div style={{ marginTop: '28px', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                <a
+                  href="/resume.pdf"
+                  download="Gokul_Babu_Resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-cta-btn hero-resume-btn"
+                  style={{ marginTop: 0 }}
+                  aria-label="Download Gokul Babu's Resume (PDF)"
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  <span>Download Resume (PDF)</span>
+                </a>
+
+                <a
+                  href="/resume.pdf"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hero-cta-btn"
+                  style={{ marginTop: 0 }}
+                  aria-label="Preview Gokul Babu's Resume in new tab"
+                >
+                  <span>Preview in Tab</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="7" x2="17" y2="17" />
+                    <polyline points="17 7 17 17 7 17" />
+                  </svg>
+                </a>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-              {techStackGroups.map((group) => (
-                <div key={group.title} className="glass-card p-5">
-                  <h3 className="text-lg font-semibold mb-3 text-cyan-100">{group.title}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((tech) => (
-                      <span key={tech} className="glass-pill px-3 py-1 text-xs">
-                        {tech}
+            {/* Right: Technical Stack Categories */}
+            <div className="about-col-right">
+              {categories.map(cat => (
+                <div key={cat.name} className="tech-category-group">
+                  <h3 className="tech-category-heading">
+                    <span style={{ color: 'var(--emerald)' }}>//</span> {cat.name}
+                  </h3>
+                  <div className="tech-chips-grid">
+                    {cat.skills.map(skill => (
+                      <span key={skill} className="tech-chip">
+                        <span className="tech-chip-icon">◈</span>
+                        {skill}
                       </span>
                     ))}
                   </div>
@@ -83,100 +98,8 @@ export const About = () => {
               ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-            <div className="glass-card glass-card-hover p-6 md:p-7">
-              <h3 className="text-xl font-bold mb-5 flex items-center gap-2 text-cyan-100">
-                <span className="w-2 h-6 bg-cyan-300 rounded"></span>
-                🏫 Education
-              </h3>
-
-              <div className="space-y-4 text-slate-200/90">
-
-                <div className="glass-card p-4">
-                  <p className="leading-relaxed">
-                    <strong>B.Tech in Computer Science & Engineering</strong>
-                    <br />
-                    College of Engineering, Kallooppara (2019–2023)
-                    <br />
-                    CGPA: <span className="text-cyan-200 font-semibold">8.44</span>
-                  </p>
-                </div>
-
-                <div className="glass-card p-4">
-                  <p className="leading-relaxed">
-                    <strong>Higher Secondary (+2)</strong>
-                    <br />
-                    St Peter's HSS Kurumpanadom (2017–2019)
-                    <br />
-                    Score: <span className="text-cyan-200 font-semibold">95%</span>
-                  </p>
-                </div>
-
-
-                <div className="glass-card p-4">
-                  <p className="leading-relaxed mb-2">
-                    <strong>Major Project:</strong> Smart Verification System for Media Files
-                  </p>
-
-                  <ul className="list-disc list-inside ml-1 text-slate-300/90 space-y-2">
-                    <li>Developed Python + MySQL system for validating media authenticity.</li>
-                    <li>Implemented metadata analysis and verification logic.</li>
-                    <li>Focused on integrity validation and anomaly detection.</li>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="glass-card glass-card-hover p-6 md:p-7">
-              <h3 className="text-xl font-bold mb-5 flex items-center gap-2 text-cyan-100">
-                <span className="w-2 h-6 bg-blue-300 rounded"></span>
-                💼 Work Experience
-              </h3>
-
-              <div className="space-y-5 text-slate-200/90 relative">
-                <div className="absolute left-[11px] top-2 bottom-2 w-px bg-gradient-to-b from-cyan-300/60 to-transparent" />
-
-                <div className="relative pl-8">
-                  <span className="absolute left-0 top-2.5 h-3.5 w-3.5 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(103,232,249,0.8)]" />
-                  <div className="glass-card p-4 border-blue-300/35">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-lg text-cyan-100">
-                        Software Engineer L1 — ZeroNorth
-                      </h4>
-                      <span className="glass-pill text-xs">Nov 2023 – Present</span>
-                    </div>
-                    <ul className="mt-2 space-y-2 list-disc list-inside leading-relaxed text-slate-200/90">
-                      <li>Designed and maintained backend modules for maritime intelligence platforms.</li>
-                      <li>Worked with AWS SQS-driven workflows and async processing pipelines.</li>
-                      <li>Improved logging, observability, and API efficiency.</li>
-                      <li>Delivered complex modules end-to-end (Star Performer recognition).</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="relative pl-8">
-                  <span className="absolute left-0 top-2.5 h-3.5 w-3.5 rounded-full bg-blue-200/85" />
-                  <div className="glass-card p-4">
-                    <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <h4 className="font-semibold text-lg text-cyan-100">
-                        Software Engineer Trainee Intern — ZeroNorth
-                      </h4>
-                      <span className="glass-pill text-xs">Apr 2023 – Nov 2023</span>
-                    </div>
-                    <ul className="mt-2 space-y-2 list-disc list-inside leading-relaxed text-slate-200/90">
-                      <li>Developed full-stack features using Angular, Node.js, Express.js, MongoDB.</li>
-                      <li>Built REST APIs and optimized UI interactions.</li>
-                      <li>Gained hands-on experience in production workflows and debugging.</li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </RevealOnScroll>
+        </RevealOnScroll>
+      </div>
     </section>
   );
 };

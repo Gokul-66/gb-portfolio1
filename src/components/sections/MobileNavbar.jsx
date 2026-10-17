@@ -68,6 +68,20 @@ export const MobileNavbar = ({ menuOpen, setMenuOpen }) => {
       >
         Contact
       </a>
+      <a
+        href="/resume.pdf"
+        download="Gokul_Babu_Resume.pdf"
+        target="_blank"
+        rel="noreferrer"
+        onClick={() => setMenuOpen(false)}
+        className={`text-2xl font-semibold text-emerald-400 my-4 transform transition-all duration-300
+            ${
+              menuOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+            }        
+    `}
+      >
+        Resume (PDF) ↓
+      </a>
     </div>
   );
 };
