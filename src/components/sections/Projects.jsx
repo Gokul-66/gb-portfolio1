@@ -92,12 +92,13 @@ const PROJECTS = [
     description:
       'Open-source booking engine that stays correct when requests race, payment webhooks repeat, and money arrives after a hold has expired. A Postgres exclusion constraint decides availability, a transactional outbox delivers events, and a chaos harness kills processes and crashes the database to prove it.',
     outcome: '0 of 200 slots oversold vs 199 with check-then-insert; 0 invariant violations across 35 process kills and a Postgres crash.',
-    tech: ['TypeScript', 'Node.js', 'Fastify', 'PostgreSQL', 'Outbox Pattern', 'Chaos Testing', 'GitHub Actions'],
+    tech: ['TypeScript', 'Node.js', 'Fastify', 'PostgreSQL', 'Outbox Pattern', 'Chaos Testing', 'GitHub Actions', 'Render'],
     image: '/booking-lab.webp',
     imageAlt: 'Booking Integrity Lab live demo: race, duplicate webhook and late payment experiments',
     isConfidential: false,
     darkBg: true,
     links: [
+      { label: 'Live Demo', href: 'https://booking-integrity-lab.onrender.com/' },
       { label: 'GitHub', href: 'https://github.com/Gokul-66/booking-integrity-lab' },
     ],
   },
