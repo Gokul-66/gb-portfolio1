@@ -52,7 +52,7 @@ export const About = () => {
                   rel="noreferrer"
                   className="hero-cta-btn hero-resume-btn"
                   style={{ marginTop: 0 }}
-                  aria-label="Download Gokul Babu's Resume (PDF)"
+                  aria-label="Download Resume (PDF)"
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
@@ -68,7 +68,7 @@ export const About = () => {
                   rel="noreferrer"
                   className="hero-cta-btn"
                   style={{ marginTop: 0 }}
-                  aria-label="Preview Gokul Babu's Resume in new tab"
+                  aria-label="Preview in Tab: resume PDF"
                 >
                   <span>Preview in Tab</span>
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +84,7 @@ export const About = () => {
               {categories.map(cat => (
                 <div key={cat.name} className="tech-category-group">
                   <h3 className="tech-category-heading">
-                    <span style={{ color: 'var(--emerald)' }}>//</span> {cat.name}
+                    <span style={{ color: 'var(--emerald-text)' }}>//</span> {cat.name}
                   </h3>
                   <div className="tech-chips-grid">
                     {cat.skills.map(skill => (

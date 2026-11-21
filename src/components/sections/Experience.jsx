@@ -75,7 +75,7 @@ export const Experience = () => {
                 <div className="milestone-top-row">
                   <span>{m.year}</span>
                   <div style={{ flex: 1, height: '1px', background: 'var(--border)', margin: '0 10px' }} />
-                  <span style={{ color: 'var(--emerald)' }}>{m.tag}</span>
+                  <span style={{ color: 'var(--emerald-text)' }}>{m.tag}</span>
                 </div>
 
                 <div className="milestone-icon-box">

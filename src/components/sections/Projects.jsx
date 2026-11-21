@@ -17,7 +17,7 @@ const PROJECTS = [
       'End-to-end reservation platform handling temporary asset hold, availability conflict validation, coupon-based pricing, payment confirmations, and event-driven notifications—built for correctness under concurrent booking pressure.',
     outcome: 'Zero double-booking incidents in production; async processing absorbed 3× traffic spikes without degradation.',
     tech: ['Node.js', 'Express.js', 'Redis', 'BullMQ', 'MySQL', 'Razorpay', 'AWS SQS', 'GCP', 'Docker'],
-    image: '/booking-arch.jpg',
+    image: '/booking-arch.webp',
     imageAlt: 'Booking Engine Architecture Diagram',
     isConfidential: true,
     darkBg: false,
@@ -31,7 +31,7 @@ const PROJECTS = [
       'Identified hot database queries causing 1,800–2,200ms latency on frequently accessed endpoints. Designed and implemented a Redis caching layer with TTL-based invalidation strategy, bringing response times to 150–300ms without data staleness.',
     outcome: 'API response time reduced from ~2s to 150–300ms — an 85–93% improvement on cached routes.',
     tech: ['Node.js', 'Redis', 'AWS CloudWatch', 'REST APIs', 'MySQL'],
-    image: '/api-cache.jpg',
+    image: '/api-cache.webp',
     imageAlt: 'Redis Caching Before/After Diagram',
     isConfidential: true,
     darkBg: false,
@@ -45,7 +45,7 @@ const PROJECTS = [
       'Replaced synchronous XML processing and blocking I/O operations with an event-driven queue architecture using AWS SQS and BullMQ. Background workers now handle heavy transformations, retries, and failure isolation—reducing critical path latency significantly.',
     outcome: '40% reduction in critical workflow processing time after migrating synchronous operations to queue-based architecture.',
     tech: ['Node.js', 'AWS SQS', 'BullMQ', 'Kafka', 'Redis', 'XML Processing'],
-    image: '/async-pipeline.jpg',
+    image: '/async-pipeline.webp',
     imageAlt: 'Asynchronous Processing Pipeline Architecture Diagram with AWS SQS, BullMQ, and Kafka',
     isConfidential: true,
     darkBg: false,
@@ -59,7 +59,7 @@ const PROJECTS = [
       'Full-stack platform that extracts resume text from PDFs, evaluates ATS compatibility, matches job descriptions, and returns structured feedback using LLaMA 3 via Groq API. Role-based access with approval workflow and persistent analysis history.',
     outcome: 'Live production deployment on Vercel (frontend) + Render (backend). Public demo available.',
     tech: ['React', 'Vite', 'Node.js', 'Express', 'Firebase Auth', 'Firestore', 'Groq LLaMA3', 'Render', 'Vercel'],
-    image: '/resume.png',
+    image: '/resume.webp',
     imageAlt: 'AI Resume Analyzer Interface',
     isConfidential: false,
     darkBg: true,
@@ -76,7 +76,7 @@ const PROJECTS = [
       'Event-driven backend using Node.js, Redis (BullMQ), and MongoDB. Ride creation events are published to a queue and consumed by distributed workers that assign drivers in real time—with idempotency guards and exponential retry logic.',
     outcome: 'Live demo on Vercel. Open source on GitHub.',
     tech: ['Node.js', 'Express.js', 'BullMQ', 'Redis (Upstash)', 'MongoDB', 'Render', 'Vercel'],
-    image: '/rideapi.png',
+    image: '/rideapi.webp',
     imageAlt: 'Ride Dispatch System Interface',
     isConfidential: false,
     darkBg: true,
@@ -86,6 +86,8 @@ const PROJECTS = [
     ],
   },
 ];
+
+const TOTAL = String(PROJECTS.length).padStart(2, '0');
 
 export const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -240,10 +242,12 @@ export const Projects = () => {
       const rect = el.getBoundingClientRect();
       const inView = rect.top < window.innerHeight && rect.bottom > 0;
       if (!inView) return;
+      if (e.altKey || e.ctrlKey || e.metaKey || e.target.closest('input, textarea, select, [contenteditable]')) return;
 
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      // At either end, let the arrow key scroll the page so keyboard users can leave the section.
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowDown') && activeIndex < PROJECTS.length - 1) {
         nextProject();
-      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      } else if ((e.key === 'ArrowLeft' || e.key === 'ArrowUp') && activeIndex > 0) {
         prevProject();
       }
     };
@@ -275,7 +279,7 @@ export const Projects = () => {
             <div className="project-thumb-list" role="tablist" aria-label="Project selector">
               <div className="project-thumb-list-header">
                 <span>PROJECT INDEX</span>
-                <span className="project-thumb-counter">{activeProj.num} OF 05 ACTIVE</span>
+                <span className="project-thumb-counter">{activeProj.num} OF {TOTAL} ACTIVE</span>
               </div>
 
               {PROJECTS.map((proj, idx) => {
@@ -352,7 +356,7 @@ export const Projects = () => {
               <div className="gallery-header-panel">
                 <div className="gallery-header-top-row">
                   <div className="gallery-header-counter">
-                    <span className="gallery-counter-num">{activeProj.num} / 05</span>
+                    <span className="gallery-counter-num">{activeProj.num} / {TOTAL}</span>
                     <span className="gallery-counter-category-pill">{activeProj.category}</span>
                   </div>
 
@@ -363,7 +367,6 @@ export const Projects = () => {
                         onClick={prevProject}
                         className="gallery-nav-btn"
                         title="Previous project"
-                        aria-label="Previous project"
                       >
                         ← Prev
                       </button>
@@ -372,7 +375,6 @@ export const Projects = () => {
                         onClick={nextProject}
                         className="gallery-nav-btn"
                         title="Next project"
-                        aria-label="Next project"
                       >
                         Next →
                       </button>
@@ -402,7 +404,7 @@ export const Projects = () => {
                   </div>
                 </div>
 
-                <h3 className="gallery-project-title" aria-live="polite">
+                <h3 className="gallery-project-title" aria-label={activeProj.title}>
                   {typedTitle}
                 </h3>
 
@@ -422,7 +424,7 @@ export const Projects = () => {
               {/* 2. MIDDLE DIAGRAM VIEWPORT: 100% Unobscured Architecture Diagram / Preview */}
               <div ref={viewportRef} className="gallery-viewport">
                 <div ref={trackRef} className="gallery-track">
-                  {PROJECTS.map((proj) => (
+                  {PROJECTS.map((proj, idx) => (
                     <div
                       key={proj.num}
                       className={`gallery-card ${proj.darkBg ? 'dark-bg' : ''}`}
@@ -438,7 +440,7 @@ export const Projects = () => {
                           src={proj.image}
                           alt={proj.imageAlt || proj.title}
                           className="gallery-card-img"
-                          loading="eager"
+                          loading={idx === 0 ? 'eager' : 'lazy'}
                         />
                       </a>
                     </div>
@@ -495,7 +497,7 @@ export const Projects = () => {
                 <span className="corner-reticle corner-br" aria-hidden="true" />
 
                 <div className="showcase-header-bar">
-                  <div className="showcase-counter">{proj.num} / 05</div>
+                  <div className="showcase-counter">{proj.num} / {TOTAL}</div>
                   <div className="showcase-header-links">
                     {proj.links.map((l) => (
                       <a
@@ -541,7 +543,7 @@ export const Projects = () => {
                     ))}
                   </div>
 
-                  <div style={{ marginTop: '14px', fontSize: '0.75rem', color: 'var(--emerald)', fontFamily: 'var(--font-mono)' }}>
+                  <div style={{ marginTop: '14px', fontSize: '0.75rem', color: 'var(--emerald-text)', fontFamily: 'var(--font-mono)' }}>
                     ★ {proj.outcome}
                   </div>
                 </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LoadingScreen } from './components/Loading';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Navbar } from './components/sections/Navbar';
@@ -14,10 +14,11 @@ import { Footer } from './components/sections/Footer';
 
 function App() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const handleLoaded = useCallback(() => setIsLoaded(true), []);
 
   return (
     <>
-      <LoadingScreen onComplete={() => setIsLoaded(true)} />
+      <LoadingScreen onComplete={handleLoaded} />
 
       <div
         style={{

@@ -24,7 +24,7 @@ export const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
                 className="footer-nav-link"
-                style={{ color: 'var(--emerald)' }}
+                style={{ color: 'var(--emerald-text)' }}
               >
                 Resume (PDF) ↓
               </a>
@@ -69,7 +69,7 @@ export const Footer = () => {
               target="_blank"
               rel="noreferrer"
               style={{ color: 'var(--foreground-muted)' }}
-              aria-label="Download Resume"
+              aria-label="Resume (PDF), download"
             >
               Resume (PDF) ↗
             </a>

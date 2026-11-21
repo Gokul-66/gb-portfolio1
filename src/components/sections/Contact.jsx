@@ -177,7 +177,7 @@ export const Contact = () => {
                       fontSize: '0.8125rem',
                       fontFamily: 'var(--font-mono)',
                       background: status.state === 'success' ? 'var(--emerald-bg)' : 'rgba(239, 68, 68, 0.1)',
-                      color: status.state === 'success' ? 'var(--emerald)' : '#ef4444',
+                      color: status.state === 'success' ? 'var(--emerald-text)' : '#ef4444',
                       border: `1px solid ${status.state === 'success' ? 'var(--emerald)' : 'rgba(239, 68, 68, 0.3)'}`,
                     }}
                   >

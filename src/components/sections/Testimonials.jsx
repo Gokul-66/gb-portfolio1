@@ -64,7 +64,7 @@ export const Testimonials = () => {
               <div className="testimonial-footer">
                 <div className="testimonial-avatar" aria-hidden="true">{t.avatar}</div>
                 <div>
-                  <h4 className="testimonial-author-name">{t.name}</h4>
+                  <h3 className="testimonial-author-name">{t.name}</h3>
                   <p className="testimonial-author-role">{t.role}</p>
                 </div>
                 <div className="testimonial-stars" aria-label="5 stars">★★★★★</div>
