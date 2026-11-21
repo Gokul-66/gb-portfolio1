@@ -85,6 +85,22 @@ const PROJECTS = [
       { label: 'GitHub', href: 'https://github.com/Gokul-66/ride-hailing-project' },
     ],
   },
+  {
+    num: '06',
+    category: 'Backend Engineering',
+    title: 'Booking Integrity Lab',
+    description:
+      'Open-source booking engine that stays correct when requests race, payment webhooks repeat, and money arrives after a hold has expired. A Postgres exclusion constraint decides availability, a transactional outbox delivers events, and a chaos harness kills processes and crashes the database to prove it.',
+    outcome: '0 of 200 slots oversold vs 199 with check-then-insert; 0 invariant violations across 35 process kills and a Postgres crash.',
+    tech: ['TypeScript', 'Node.js', 'Fastify', 'PostgreSQL', 'Outbox Pattern', 'Chaos Testing', 'GitHub Actions'],
+    image: '/booking-lab.webp',
+    imageAlt: 'Booking Integrity Lab live demo: race, duplicate webhook and late payment experiments',
+    isConfidential: false,
+    darkBg: true,
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Gokul-66/booking-integrity-lab' },
+    ],
+  },
 ];
 
 const TOTAL = String(PROJECTS.length).padStart(2, '0');
