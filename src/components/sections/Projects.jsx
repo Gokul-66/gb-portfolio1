@@ -102,6 +102,22 @@ const PROJECTS = [
       { label: 'GitHub', href: 'https://github.com/Gokul-66/booking-integrity-lab' },
     ],
   },
+  {
+    num: '07',
+    category: 'Performance Engineering',
+    title: 'Hotpath',
+    description:
+      'Open-source tiered cache for a slow query: an in-process LRU with TinyLFU admission, then Redis, then Postgres. A version guard stops readers from storing values a write has overtaken, request coalescing and a lock contain stampedes, and reads continue when Redis fails.',
+    outcome: '2,450 to about 26,000 req/s on one machine; 300 simultaneous reads of a cold key cause 1 database load; 0 stale values vs 117 without the guard.',
+    tech: ['TypeScript', 'Node.js', 'Redis', 'PostgreSQL', 'LRU / TinyLFU', 'Fastify', 'GitHub Actions'],
+    image: '/hotpath.webp',
+    imageAlt: 'Hotpath live demo: cache layers, stampede, write race and Redis outage experiments',
+    isConfidential: false,
+    darkBg: true,
+    links: [
+      { label: 'GitHub', href: 'https://github.com/Gokul-66/hotpath' },
+    ],
+  },
 ];
 
 const TOTAL = String(PROJECTS.length).padStart(2, '0');
