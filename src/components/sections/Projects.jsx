@@ -129,6 +129,7 @@ export const Projects = () => {
   const sectionRef = useRef(null);
   const viewportRef = useRef(null);
   const trackRef = useRef(null);
+  const thumbListRef = useRef(null);
   const pinnedScrollTriggerRef = useRef(null);
   const lastScrubIndexRef = useRef(0);
   const scrubRafRef = useRef(0);
@@ -177,6 +178,19 @@ export const Projects = () => {
       duration: 0.45,
       ease: 'power2.out',
       overwrite: 'auto',
+    });
+  }, [activeIndex]);
+
+  // On short screens the thumbnail list scrolls, so keep the active project in view.
+  // scrollIntoView would also move the page, which drives the pinned gallery.
+  useEffect(() => {
+    const list = thumbListRef.current;
+    const item = list?.querySelector('.project-thumb-item.active');
+    if (!item || list.scrollHeight <= list.clientHeight) return;
+
+    list.scrollTo({
+      top: item.offsetTop - list.offsetTop - (list.clientHeight - item.offsetHeight) / 2,
+      behavior: 'smooth',
     });
   }, [activeIndex]);
 
@@ -310,7 +324,7 @@ export const Projects = () => {
         <div className="projects-unified-row">
           {/* LEFT COLUMN: Project Selector List & All Repos Button */}
           <div className="project-thumb-list-wrapper hidden lg:flex">
-            <div className="project-thumb-list" role="tablist" aria-label="Project selector">
+            <div ref={thumbListRef} className="project-thumb-list" role="tablist" aria-label="Project selector">
               <div className="project-thumb-list-header">
                 <span>PROJECT INDEX</span>
                 <span className="project-thumb-counter">{activeProj.num} OF {TOTAL} ACTIVE</span>

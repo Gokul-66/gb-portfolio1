@@ -992,10 +992,28 @@ html.dark .nav-header.scrolled {
   transition: transform 0.3s var(--ease-expo);
 }
 
-/* Short laptop screens: tighter spacing keeps every project visible while the gallery is pinned */
+/* Short laptop screens: tighter spacing, and the list scrolls inside the pinned area to follow the active project */
 @media (min-width: 1024px) and (max-height: 850px) {
   .project-thumb-list {
     gap: 6px;
+    /* 221px is where the list starts while the gallery is pinned */
+    max-height: calc(100vh - 221px - 8px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+    /* Room for the active item's offset and glow, which overflow would clip */
+    padding: 0 8px 4px 2px;
+    margin-left: -2px;
+    margin-right: -8px;
+  }
+  .project-thumb-list-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--bg);
+  }
+  .project-thumb-item {
+    flex-shrink: 0;
   }
   .project-thumb-item {
     padding: 4px 14px;
